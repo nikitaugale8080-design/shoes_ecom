@@ -1,0 +1,14 @@
+<% include ('navbar.ejs') %>
+
+<div class="container mt-5">
+    <h2>Edit Product Style</h2>
+    <form action="/admin/update_product_styles/<%= style.product_style_id %>" method="post">
+        <div class="form-group">
+            <label for="product_style_name">Style Name</label>
+            <input type="text" class="form-control" id="product_style_name" name="product_style_name" value="<%= style.product_style_name %>" required>
+        </div>
+        <button type="submit" class="btn btn-success mt-2">Update</button>
+    </form>
+</div>
+
+<% include ('footer.ejs') %>

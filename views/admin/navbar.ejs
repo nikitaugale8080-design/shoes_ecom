@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap 5 Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --sidebar-width: 250px;
+            --sidebar-bg: #1d2634;
+            --sidebar-color: #9e9ea4;
+            --sidebar-active-color: #fff;
+            --topbar-height: 70px;
+            --content-padding: 20px;
+            --transition-speed: 0.3s;
+        }
+        
+        body {
+            overflow-x: hidden;
+            background-color: #f5f7fb;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Sidebar Styling */
+        #sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: var(--sidebar-bg);
+            color: var(--sidebar-color);
+            transition: all var(--transition-speed);
+            z-index: 1000;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+        
+        .sidebar-header {
+            padding: 25px 20px 15px;
+            background: var(--sidebar-bg);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-header h3 {
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .sidebar-header .logo {
+            width: 40px;
+            height: 40px;
+            background: #4361ee;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+        
+        .sidebar-components {
+            padding: 10px 0;
+        }
+        
+        .nav-link {
+            padding: 12px 20px;
+            color: var(--sidebar-color);
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--sidebar-active-color);
+            border-left-color: #4361ee;
+        }
+        
+        .nav-link i {
+            font-size: 18px;
+            margin-right: 12px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .nav-link .bi-chevron-down {
+            margin-left: auto;
+            transition: transform 0.3s;
+            font-size: 14px;
+        }
+        
+        .nav-link.collapsed .bi-chevron-down {
+            transform: rotate(0deg);
+        }
+        
+        .nav-link:not(.collapsed) .bi-chevron-down {
+            transform: rotate(180deg);
+        }
+        
+        .submenu {
+            padding-left: 50px;
+            background: rgba(0,0,0,0.1);
+        }
+        
+        .submenu .nav-link {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* Main Content Area */
+        #content {
+            margin-left: var(--sidebar-width);
+            transition: margin-left var(--transition-speed);
+            min-height: 100vh;
+        }
+        
+        /* Top Navbar */
+        #top-navbar {
+            height: var(--topbar-height);
+            background: #fff;
+            box-shadow: 0 1px 15px rgba(0,0,0,0.04);
+            padding: 0 25px;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        
+        .navbar-search {
+            position: relative;
+            width: 300px;
+        }
+        
+        .navbar-search input {
+            border-radius: 30px;
+            padding-left: 40px;
+            background-color: #f5f7fb;
+            border: 1px solid #e6ebf1;
+        }
+        
+        .navbar-search i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0aec0;
+        }
+        
+        .nav-user img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #f23a2e;
+            color: white;
+            font-size: 10px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: var(--content-padding);
+        }
+        
+        .page-header {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e6ebf1;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+            margin-bottom: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+        
+        .card-header {
+            background: transparent;
+            border-bottom: 1px solid #e6ebf1;
+            padding: 15px 20px;
+            font-weight: 600;
+        }
+        
+        /* Toggle Button */
+        #sidebarCollapse {
+            background: transparent;
+            border: none;
+            color: #4a5568;
+            font-size: 1.5rem;
+            padding: 5px;
+            display: none;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            #sidebar {
+                margin-left: -250px;
+            }
+            
+            #sidebar.active {
+                margin-left: 0;
+            }
+            
+            #content {
+                margin-left: 0;
+            }
+            
+            #sidebarCollapse {
+                display: block;
+            }
+        }
+        
+        /* Stats Cards */
+        .stat-card {
+            border-left: 4px solid;
+            border-radius: 8px;
+        }
+        
+        .stat-card.primary {
+            border-left-color: #4361ee;
+        }
+        
+        .stat-card.success {
+            border-left-color: #06d6a0;
+        }
+        
+        .stat-card.warning {
+            border-left-color: #ffd166;
+        }
+        
+        .stat-card.danger {
+            border-left-color: #ef476f;
+        }
+        
+        .stat-card h5 {
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+        
+        .stat-card i {
+            font-size: 24px;
+            opacity: 0.8;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 15px 20px;
+            background: #fff;
+            border-top: 1px solid #e6ebf1;
+            margin-top: 30px;
+            font-size: 0.85rem;
+            color: #718096;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <div class="sidebar-header d-flex align-items-center">
+                <div class="logo">
+                    <i class="bi bi-speedometer2 text-white"></i>
+                </div>
+                <h3>Stylo Footwear</h3>
+            </div>
+            
+            <ul class="list-unstyled sidebar-components">
+                <li>
+                    <a href="/admin" class="nav-link active">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/users" data-bs-toggle="collapse" class="nav-link collapsed">
+                        <i class="bi bi-layout-text-window-reverse"></i>
+                        <span>Users</span>
+                       
+                    </a>
+                    
+                </li>
+                <li>
+                    <a href="/admin/add_products" class="nav-link">
+                        <i class="bi bi-table"></i>
+                        <span>Products</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/product_list" class="nav-link">
+                        <i class="bi bi-table"></i>
+                        <span>Product List</span>
+                    </a>
+                </li>
+                
+                        <li>
+                            <a href="/admin/pending" class="nav-link">
+                                <i class="bi bi-hourglass-split"></i>
+                                <span>Pending Orders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/dispatch" class="nav-link">
+                                <i class="bi bi-truck"></i>
+                                <span>Dispatch</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/deliver" class="nav-link">
+                                <i class="bi bi-box-seam"></i>
+                                <span>Deliver</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/cancel" class="nav-link">
+                                <i class="bi bi-x-circle"></i>
+                                <span>Cancel</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/return" class="nav-link">
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                                <span>Return</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/banners" class="nav-link">
+                                <i class="bi bi-image"></i>
+                                <span>Promotional Banners</span>
+                            </a>
+                        </li>
+            
+               
+               
+                        <li>
+                            <a href="/admin/slider_images" class="nav-link">
+                                <i class="bi bi-image"></i>
+                                <span>Slider Images</span>
+                            </a>
+                        </li>
+            
+                        <li>
+                            <a href="/admin/product_brands" class="nav-link" id="productBrandsLink">
+                                <i class="bi bi-gear-wide-connected"></i>
+                                <span>Product Brands</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/product_styles" class="nav-link">
+                                <i class="bi bi-speedometer2"></i>
+                                <span>Product Style</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="/admin/product_types" class="nav-link">
+                                <i class="bi bi-type"></i>
+                                <span>Product Type</span>
+                            </a>
+                        </li>
+        </nav>           
+        
+        <!-- Page Content -->
+        <div id="content">
+            <!-- Top Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" id="top-navbar">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    
+                   
+                    
+                    <ul class="navbar-nav ms-auto align-items-center">
+                       
+                        <li class="nav-item ms-3">
+                            <div class="nav-user d-flex align-items-center">
+                               
+                                <div class="ms-2 d-none d-md-block">
+                                    <div class="fw-medium">Admin</div>
+                                    
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>

@@ -1,0 +1,55 @@
+<%- include('navbar.ejs') %>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Product List</h1>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Sr No</th>
+                <th>Product Name</th>
+                <th>Brand</th>
+                <th>Type</th>
+                <th>Style</th>
+                <th>Market Price</th>
+                <th>Selling Price</th>
+                <th>Trending</th>
+                <th>Stock</th>
+                <th>For</th>
+                <th>Color</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Discount %</th>
+                <!-- <th>Actions</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <% products.forEach(function(product, index) { %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= product.product_name %></td>
+                    <td><%= product.product_brand_name %></td>
+                    <td><%= product.product_type_name %></td>
+                    <td><%= product.product_style_name %></td>
+                    <td>₹ <%= product.product_market_price %></td>
+                    <td>₹ <%= product.product_price %></td>
+                    <td><%= product.product_is_trending %></td>
+                    <td><%= product.product_stock %></td>
+                    <td><%= product.product_for %></td>
+                    <td><%= product.product_color %></td>
+                    <td><%= product.product_description %></td>
+                    <td>
+                        <img src="/products/<%= product.product_main_image %>" width="80" height="80">
+                    </td>
+                    <td><%= product.apply_discount_percent.toFixed(2) %> %</td>
+                    <!-- <td>
+                        <a href="/admin/edit_product/<%= product.product_id %>" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="/admin/delete_product/<%= product.product_id %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                    </td> -->
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('footer.ejs') %>

@@ -1,0 +1,38 @@
+<%- include ('navbar.ejs') %>
+
+<div class="container">
+    <div class="row">
+        <!-- Form Section -->
+        <div class="col-md-12">
+            <h1>Product Brand</h1>
+            <form action="/admin/save_product_brands" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="product_brand_name">Brand Name</label>
+                    <input type="text" class="form-control" id="product_brand_name" name="product_brand_name" required>
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Save</button>
+            </form>
+
+            <!-- Table Section -->
+            <table class="table mt-4">
+                <tr>
+                    <th>Sr No</th>
+                    <th>Brand Name</th>
+                    <th>Action</th>
+                </tr>
+                <% for(var i=0; i<brands.length; i++) { %>
+                <tr>
+                    <td><%= i+1 %></td>
+                    <td><%= brands[i].product_brand_name %></td>
+                    <td>
+                        <a href="/admin/edit_product_brands/<%= brands[i].product_brand_id %>" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="/admin/delete_product_brands/<%= brands[i].product_brand_id %>" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                <% } %>
+            </table>
+        </div>
+    </div>
+</div>
+
+<%- include ('footer.ejs') %>

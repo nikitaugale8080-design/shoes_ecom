@@ -1,0 +1,46 @@
+<%- include("navbar.ejs") %>
+<br><br><br><br>
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-4">
+      <img src="/products/<%-info[0].product_main_image %>" width="100%">
+    </div>
+    <div class="col-md-4">
+      <h3><%- info[0].product_name %></h3>
+      <h3>&#8377; <%- info[0].product_price %>/-</h3>
+      <br>
+      <% if(is_login){ %>
+        <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#getUserEmailModal">
+          Buy Now
+        </button>
+      <% } else { %>
+        <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#getUserEmailModal">
+          Buy Now
+        </button>
+      <% } %>
+
+      <a href="/add_to_cart/<%-info[0].product_id%>">
+        <button class="btn btn-primary">Add To Cart</button>
+      </a>
+      <br><br>
+      <p><%- info[0].product_description %></p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="getUserEmailModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form action="/send_otp_mail" method="post">
+          <h3>Enter Your Email</h3>
+          <input type="text" name="email" id="email" class="form-control" required>
+          <button class="btn btn-primary mt-2">Next</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("footer.ejs") %>

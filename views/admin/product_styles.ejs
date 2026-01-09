@@ -1,0 +1,48 @@
+<%- include ('navbar.ejs') %>
+
+<div class="container ">
+    <form action="/admin/save_product_styles" method="post" enctype="multipart/form-data">
+
+       <div class="row">
+         <!-- Form Section -->
+          <div class="col-md-12">
+             <h1>Add New Style</h1>
+             <input type="text" name="product_style_name" class="form-control"><br><br>
+             <input type="file" name="product_style_image" class="form-control"><br><br>
+             <button class="btn btn-primary mt-2">Save Style</button>
+          </div>
+       </div>
+    </form>
+    </div>
+
+
+
+        <!-- Table Section -->
+    <div class="col-md-12 mt-4">
+            <h1>All Styles</h1>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Action</th>
+                    <th>Sr No</th>
+                    <th>Style Name</th>
+                    <th>Image</th>
+                </tr>
+                <% for(var i=0; i<styles.length; i++) { %>
+                <tr>
+                    <td>
+                        <a href="/admin/edit_product_styles/<%= styles[i].product_style_id %>">Edit</a> |
+                    <a href="/admin/delete_product_styles/<%= styles[i].product_style_id %>">Delete</a>
+                    </td>
+                    <td><%= i+1 %></td>
+                    <td><%= styles[i].product_style_name %></td>
+                    <td>
+                        <img src="/styles/<%= styles[i].product_style_image %>" width="100">
+                    </td>
+                </tr>
+                <% } %>
+            </table>
+        </div>
+    </div>
+
+
+<%- include ('footer.ejs') %>

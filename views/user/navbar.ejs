@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SoleFusion | Premium Footwear</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #000;
+      --secondary: #fff;
+      --accent: #f8f9fa;
+      --light-gray: #f0f0f0;
+      --dark-gray: #333;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--secondary);
+      color: var(--primary);
+    }
+    
+    /* Navbar styling */
+    .navbar {
+      background: var(--primary);
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+      padding: 1rem 0;
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--secondary) !important;
+      text-decoration: none;
+    }
+    
+    .navbar-nav .nav-link {
+      color: rgba(255,255,255,0.9) !important;
+      font-weight: 500;
+      margin: 0 0.5rem;
+      padding: 0.5rem 1rem !important;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover {
+      color: var(--secondary) !important;
+      background-color: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+    
+    .dropdown-menu {
+      border: none;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border-radius: 15px;
+      padding: 1rem 0;
+      margin-top: 0.5rem;
+      background: var(--primary);
+    }
+    
+    .dropdown-item {
+      padding: 0.75rem 1.5rem;
+      color: var(--secondary);
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown-item:hover {
+      background-color: rgba(255,255,255,0.1);
+      color: #667eea;
+      transform: translateX(5px);
+    }
+    
+    .navbar-toggler {
+      border: none;
+      padding: 0.25rem 0.5rem;
+      color: var(--secondary);
+    }
+    
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+    
+    .search-form {
+      position: relative;
+      max-width: 300px;
+    }
+    
+    .search-input {
+      border-radius: 25px;
+      border: 2px solid rgba(255,255,255,0.3);
+      background-color: rgba(255,255,255,0.1);
+      color: var(--secondary);
+      padding: 0.5rem 1rem 0.5rem 2.5rem;
+    }
+    
+    .search-input::placeholder {
+      color: rgba(255,255,255,0.7);
+    }
+    
+    .search-input:focus {
+      background-color: rgba(255,255,255,0.2);
+      border-color: rgba(255,255,255,0.5);
+      box-shadow: 0 0 0 0.2rem rgba(255,255,255,0.25);
+      color: var(--secondary);
+    }
+    
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,0.7);
+    }
+    
+    .btn-custom {
+      border-radius: 25px;
+      padding: 0.5rem 1.5rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    
+    .btn-outline-light {
+      border-color: rgba(255,255,255,0.3);
+      color: var(--secondary);
+    }
+    
+    .btn-outline-light:hover {
+      background-color: var(--secondary);
+      color: var(--primary);
+      border-color: var(--secondary);
+      transform: translateY(-2px);
+    }
+    
+    .btn-primary-custom {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+      border: none;
+      color: var(--secondary);
+    }
+    
+    .btn-primary-custom:hover {
+      background: linear-gradient(135deg, #ee5a24 0%, #ff6b6b 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(238, 90, 36, 0.4);
+    }
+    
+    .icon-btn {
+      position: relative;
+      color: var(--secondary);
+      font-size: 1.2rem;
+      padding: 0.5rem;
+      margin: 0 0.25rem;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .icon-btn:hover {
+      color: var(--secondary);
+      background-color: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+    
+    .badge-custom {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+      border-radius: 50%;
+      font-size: 0.7rem;
+      padding: 0.25rem 0.5rem;
+      min-width: 20px;
+      text-align: center;
+    }
+    
+    /* Hero carousel */
+    #heroCarousel .carousel-item img {
+      object-fit: cover;
+      height: 500px;
+    }
+    
+    .carousel-caption {
+      background: rgba(0, 0, 0, 0.55);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+      border-radius: 15px;
+      padding: 2rem;
+      max-width: 450px;
+      text-align: left;
+    }
+    
+    .carousel-caption h2 {
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    
+    .carousel-caption .btn {
+      font-size: 1.1rem;
+      border-radius: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: background 0.2s, color 0.2s;
+    }
+    
+    /* Section styling */
+    .section-title {
+      position: relative;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+    
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: var(--primary);
+    }
+    
+    /* Product cards */
+    .product-card {
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      background: var(--secondary);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    .product-card img {
+      object-fit: cover;
+      height: 220px;
+      transition: transform 0.3s ease;
+    }
+    
+    .product-card:hover img {
+      transform: scale(1.05);
+    }
+    
+    .product-card .card-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .product-card .card-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .product-card .card-text {
+      color: #666;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    
+    .product-card .price {
+      font-weight: bold;
+      font-size: 1.25rem;
+      color: var(--primary);
+    }
+    
+    /* Promotional banner */
+    .promo-banner {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    /* Style cards */
+    .style-card {
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      background: var(--secondary);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      height: 100%;
+    }
+    
+    .style-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    .style-card img {
+      object-fit: cover;
+      height: 140px;
+    }
+    
+    .style-card .card-body {
+      padding: 1rem;
+      text-align: center;
+    }
+    
+    .style-card .card-title {
+      font-weight: 600;
+      margin: 0;
+    }
+    
+    /* Discount products */
+    .discount-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      z-index: 1;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--primary);
+      color: var(--secondary);
+      padding-top: 3rem;
+      padding-bottom: 2rem;
+    }
+    
+    footer h4, footer h6 {
+      color: var(--secondary);
+      font-weight: 600;
+    }
+    
+    footer a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    footer a:hover {
+      color: var(--secondary);
+      text-decoration: underline;
+    }
+    
+    footer .form-control {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: var(--secondary);
+    }
+    
+    footer .form-control:focus {
+      box-shadow: 0 0 0 0.2rem rgba(255,255,255,0.25);
+      border-color: rgba(255,255,255,0.5);
+    }
+    
+    .footer-divider {
+      border-color: rgba(255,255,255,0.1);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 991.98px) {
+      .navbar-nav {
+        text-align: center;
+        margin: 1rem 0;
+      }
+      
+      .search-form {
+        max-width: 100%;
+        margin: 1rem 0;
+      }
+      
+      .navbar-nav .nav-link {
+        margin: 0.25rem 0;
+      }
+      
+      #heroCarousel .carousel-caption {
+        font-size: 0.95rem;
+        padding: 1.2rem 1rem;
+        max-width: 95vw;
+      }
+      
+      #heroCarousel img {
+        height: 300px !important;
+      }
+    }
+    
+    @media (max-width: 767.98px) {
+      .promo-banner .row > div {
+        text-align: center;
+      }
+      
+      .promo-banner img {
+        margin-bottom: 1.5rem;
+      }
+      
+      footer .row > div {
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+      
+      footer ul {
+        padding-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Professional Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <!-- Brand -->
+      <a class="navbar-brand" href="/">
+        <i class="fas fa-shoe-prints me-2"></i>SoleFusion
+      </a>
+      
+      <!-- Mobile Toggle -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+      </button>
+      
+      <!-- Navbar Items -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <!-- Men's -->
+          <li class="nav-item">
+            <a class="nav-link" href="/product_list?cat=Mens">Mens</a>
+          </li>
+          
+          <!-- Women's -->
+          <li class="nav-item">
+            <a class="nav-link" href="/product_list?cat=womens">Womens</a>
+          </li>
+          
+          <!-- Kids Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/product_list?cat=Kids" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Kids
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/product_list?cat=Boys"><i class="fas fa-child me-2"></i>Boys</a></li>
+              <li><a class="dropdown-item" href="/product_list?cat=Girls"><i class="fas fa-child me-2"></i>Girls</a></li>
+            </ul>
+          </li>
+          
+          <!-- Sale -->
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span class="badge bg-danger me-1">SALE</span>Sale
+            </a>
+          </li>
+        </ul>
+        
+        <!-- Search Bar -->
+        <form class="search-form d-flex me-3">
+          <i class="fas fa-search search-icon"></i>
+          <input class="form-control search-input" type="search" placeholder="Search shoes..." aria-label="Search">
+        </form>
+        
+        <!-- Right Side Buttons -->
+        <div class="d-flex align-items-center">
+          <!-- Login/Signup -->
+          <div class="dropdown me-2">
+            <button class="btn btn-outline-light btn-custom dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-user me-1"></i>Account
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#"><i class="fas fa-sign-in-alt me-2"></i>Login</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fas fa-user-plus me-2"></i>Sign Up</a></li>
+            </ul>
+          </div>
+          
+          <!-- Cart -->
+          <a href="#" class="icon-btn">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="badge badge-custom">3</span>
+          </a>
+          
+          <!-- Wishlist -->
+          <a href="#" class="icon-btn">
+            <i class="fas fa-heart"></i>
+            <span class="badge badge-custom">5</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>

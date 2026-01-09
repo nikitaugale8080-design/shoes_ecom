@@ -1,0 +1,41 @@
+<%- include ('navbar.ejs') %>
+
+<div class="container">
+    <form action="/admin/save_product_type" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Add New Type</h1>
+                <input type="text" name="product_type_name" class="form-control"><br><br>
+                <input type="file" name="product_type_image" class="form-control"><br><br>
+                <button class="btn btn-primary mt-2">Save Type</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="col-md-12 mt-4">
+        <h1>All Types</h1>
+        <table class="table table-bordered">
+            <tr>
+                <th>Action</th>
+                <th>Sr No</th>
+                <th>Type Name</th>
+                <th>Image</th>
+            </tr>
+            <% for(var i=0; i<types.length; i++) { %>
+            <tr>
+                <td>
+                    <a href="/admin/edit_product_types/<%= types[i].product_type_id %>">Edit</a> |
+                    <a href="/admin/delete_product_types/<%= types[i].product_type_id %>">Delete</a>
+                </td>
+                <td><%= i+1 %></td>
+                <td><%= types[i].product_type_name %></td>
+                <td>
+                    <img src="/types/<%= types[i].product_type_image %>" width="100">
+                </td>
+            </tr>
+            <% } %>
+        </table>
+    </div>
+</div>
+
+<%- include ('footer.ejs') %>

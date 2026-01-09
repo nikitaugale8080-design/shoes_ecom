@@ -1,0 +1,18 @@
+<%- include ('navbar.ejs') %>
+
+<div class="container">
+    <form action="/admin/update_product_types/<%= type.product_type_id %>" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="old_image" value="<%= type.product_type_image %>">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Edit Type</h1>
+                <input type="text" name="product_type_name" class="form-control" value="<%= type.product_type_name %>"><br><br>
+                <img src="/types/<%= type.product_type_image %>" width="100"><br><br>
+                <input type="file" name="product_type_image" class="form-control"><br><br>
+                <button class="btn btn-primary mt-2">Update Type</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<%- include ('footer.ejs') %>
